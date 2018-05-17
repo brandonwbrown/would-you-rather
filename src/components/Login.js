@@ -3,6 +3,8 @@ import { BrowserRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
 import { handleInitialUsers } from '../actions/shared'
+import Button from 'react-bootstrap/lib/Button';
+
 
 
 class Login extends Component {
@@ -32,20 +34,23 @@ class Login extends Component {
           <LoadingBar />
         </Fragment>
         <div>
-          <h2 className="center">Please login.</h2>
+          <h3 className="center">Please login.</h3>
         </div>
-        <div className="center">
           { this.props.loading === true ?
             null
             :
-            <select value={authedUser} onChange={(e) => this.handleLogin(e)}>
-              <option disabled>Choose a name...</option>
-              {logins.length > 0 ? logins.forEach((item) => {
-                <option value={item}>{item}</option>
-              }) : null}
-            </select>
-            }
-        </div>
+            <div className="center">
+              <select value={authedUser} onChange={(e) => this.handleLogin(e)}>
+                <option disabled>Choose a name...</option>
+                {logins.length > 0 ? logins.forEach((item) => {
+                  <option value={item}>{item}</option>
+                }) : null}
+              </select>
+              <div className="center">
+                <Button bsStyle="primary">Go</Button>
+              </div>
+            </div>
+          }
       </div>
     )
   }
