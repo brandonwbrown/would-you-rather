@@ -26,7 +26,7 @@ class Login extends Component {
     const logins = []
     Array.prototype.forEach.call(names, (n) => (logins.push(n)))
     console.log(logins)
-    logins.forEach((n) => (console.log(n)))
+    logins.map((n) => (console.log(n)))
 
     return (
       <div>
@@ -40,14 +40,14 @@ class Login extends Component {
             null
             :
             <div className="center">
-              <select value={authedUser} onChange={(e) => this.handleLogin(e)}>
+              <select value={authedUser}>
                 <option disabled>Choose a name...</option>
-                {logins.length > 0 ? logins.forEach((item) => {
-                  <option value={item}>{item}</option>
-                }) : null}
+                {logins.map((item) => {
+                  <option key={item} value={item}>{item}</option>
+                })}
               </select>
               <div className="center">
-                <Button bsStyle="primary">Go</Button>
+                <Button bsStyle="primary" onClick={(e) => this.handleLogin(e)}>Go</Button>
               </div>
             </div>
           }
