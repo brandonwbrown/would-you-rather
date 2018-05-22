@@ -13,10 +13,18 @@ class Login extends Component {
     this.props.dispatch(handleInitialUsers())
   }
 
-  handleLogin = (event) => {
+  handleLoginChange = (event) => {
     if (event.target.value){
       console.log("User selected:", event.target.value)
-      //TODO: set user in the redux store
+      //TODO: set authedUser in the redux store
+    }
+  };
+
+  handleLoginClick = () => {
+      console.log("User selected:", this.props.authedUser)
+      if(this.props.authedUser){
+        //TODO: change route to dashboard
+      }
     }
   };
 
@@ -26,7 +34,7 @@ class Login extends Component {
     const logins = []
     Array.prototype.forEach.call(names, (n) => (logins.push(n)))
     console.log(logins)
-    logins.map((n) => (console.log(n)))
+    logins.forEach((n) => (console.log(n)))
 
     return (
       <div>
@@ -40,14 +48,14 @@ class Login extends Component {
             null
             :
             <div className="center">
-              <select value={authedUser}>
+              <select value={authedUser} onChange={(e) => this.handleLoginChange(e)}>
                 <option disabled>Choose a name...</option>
                 {logins.map((item) => {
                   <option key={item} value={item}>{item}</option>
                 })}
               </select>
               <div className="center">
-                <Button bsStyle="primary" onClick={(e) => this.handleLogin(e)}>Go</Button>
+                <Button bsStyle="primary" onClick={this.handleLoginClick}>Go</Button>
               </div>
             </div>
           }
