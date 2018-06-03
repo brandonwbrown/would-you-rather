@@ -1,7 +1,5 @@
-import React, { Component, Fragment } from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import LoadingBar from 'react-redux-loading'
 import { handleInitialUsers } from '../actions/shared'
 import { setAuthedUser } from '../actions/authedUser'
 import Button from 'react-bootstrap/lib/Button';
@@ -21,9 +19,11 @@ class Login extends Component {
     }
   };
 
-  handleLoginClick = () => {
+  handleLoginClick = (e) => {
     console.log("Clicked login")
-    return <Redirect to='/' />
+    e.preventDefault();
+    const { history } = this.props;
+    history.push('/');
   }
 
   render() {
