@@ -17,8 +17,8 @@ export function getInitialUsers () {
   return Promise.all([
     _getUsers(),
   ]).then(([users]) => ({
-    users
-  }))
+      users
+     }))
 }
 
 // export function saveLikeToggle (info) {
