@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { connect } from 'react-redux'
-import Nav from './Nav'
+//import Nav from './Nav'
 import Login from './Login'
 import Dashboard from './Dashboard'
 import Question from './Question'
@@ -17,7 +17,7 @@ class App extends Component {
           <div className='container'>
             <h1 className="center">Would You Rather?</h1>
             <Switch>
-              <Route path='/login' component={Login} />
+              <Route path='/login' exact component={Login} />
               <Route path='/question/:id' component={Question} />
               <Route path='/' exact component={Dashboard} />
             </Switch>

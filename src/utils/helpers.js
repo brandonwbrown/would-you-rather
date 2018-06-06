@@ -4,23 +4,22 @@ export function formatDate (timestamp) {
   return time.substr(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString()
 }
 
-// TODO: change to formatQuestion
-export function formatTweet (tweet, author, authedUser, parentTweet) {
-  const { id, likes, replies, text, timestamp } = tweet
-  const { name, avatarURL } = author
+export function generateUID () {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+}
 
+export function formatQuestion ({ optionOneText, optionTwoText, author }) {
   return {
-    name,
-    id,
-    timestamp,
-    text,
-    avatar: avatarURL,
-    likes: likes.length,
-    replies: replies.length,
-    hasLiked: likes.includes(authedUser),
-    parent: !parentTweet ? null : {
-      author: parentTweet.author,
-      id: parentTweet.id,
+    id: generateUID(),
+    timestamp: Date.now(),
+    author,
+    optionOne: {
+      votes: [],
+      text: optionOneText,
+    },
+    optionTwo: {
+      votes: [],
+      text: optionTwoText,
     }
   }
 }

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { handleInitialUsers } from '../actions/shared'
 import { setAuthedUser } from '../actions/authedUser'
 import Button from 'react-bootstrap/lib/Button';
-import { Redirect } from 'react-router-dom'
 
 
 class Login extends Component {
@@ -14,13 +13,11 @@ class Login extends Component {
 
   handleLoginChange = (event) => {
     if (event.target.value){
-      console.log("User selected:", event.target.value)
       this.props.dispatch(setAuthedUser(event.target.value))
     }
   };
 
   handleLoginClick = (e) => {
-    console.log("Clicked login")
     e.preventDefault();
     const { history } = this.props;
     history.push('/');
@@ -31,7 +28,6 @@ class Login extends Component {
     const names = Object.keys((users || {}).users || {})
     const logins = []
     Array.prototype.forEach.call(names, (n) => (logins.push(n)))
-    console.log("authed:"+ authedUser)
 
     return (
       <div>
