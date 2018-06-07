@@ -13,7 +13,7 @@ class Dashboard extends Component {
 
   render() {
     const { authedUser } = this.props
-    
+
     return (
       <div>
         {authedUser ?
