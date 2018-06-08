@@ -13,7 +13,7 @@ class Dashboard extends Component {
 
   render() {
     const { authedUser, questionIds } = this.props
-    questionIds ? console.log("questionIDs keys:"+(Object.keys(questionIds))) : null
+    //questionIds ? console.log("questionIDs values:"+JSON.stringify(Object.values(questionIds))) : null
 
     return (
       <div>
@@ -22,9 +22,12 @@ class Dashboard extends Component {
             <h3 className='center'>Question History</h3>
             <ul className='dashboard-list'>
               {questionIds ? Object.values(questionIds).map((q) => {
-                <li key={q.id}>
-                  <Question question={q}/>
-                </li>})
+                return (
+                    <li key={q.id}>
+                      <p>{q.id}</p>
+                      <Question question={q}/>
+                    </li>)
+                  })
                 : null
               }
             </ul>
@@ -38,7 +41,6 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps ({ questions, authedUser }) {
-  console.log("questions:"+JSON.stringify(questions.questions))
   return {
     questionIds: questions.questions,
       //.sort((a,b) => questions[b].timestamp - questions[a].timestamp),
