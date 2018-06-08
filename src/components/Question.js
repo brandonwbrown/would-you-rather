@@ -7,13 +7,13 @@ import { formatDate, formatQuestion } from '../utils/helpers'
 class Question extends Component {
 
   render() {
-    const { question } = this.props
+    const { q } = this.props
+    const { id, author, timestamp, optionOne, optionTwo  } = q
+    console.log("in question:"+JSON.stringify(q))
 
-    if (question === null) {
+    if (q === null) {
       return <p>This Question does not yet exist.</p>
     }
-
-    const { id, author, timestamp, optionOne, optionTwo  } = question
 
     return (
       <Link to={`/question/${id}`} className='question'>
@@ -33,12 +33,11 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps ({ questions, authedUser }, { id }) {
-  const { question } = questions[id]
+function mapStateToProps ({ q, authedUser }) {
   return {
     authedUser: authedUser,
-    question: question
-          ? formatQuestion(question.optionOneText, question.optionTwoText, question.author)
+    q: q
+          ? formatQuestion(q.optionOneText, q.optionTwoText, q.author)
           : null
   }
 }
