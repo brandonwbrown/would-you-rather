@@ -52,10 +52,16 @@ a {
   flex-direction: row;
   justify-content: flex-start;
   text-decoration: none;
+  background-color: #eeeeee;
+  border-radius: 3px;
 }
 
 .nav li:first-child {
   padding-left: 0;
+}
+
+.nav li:last-child {
+  justify-content: right;
 }
 
 ul {
@@ -77,7 +83,7 @@ li {
 .question {
   width: 100%;
   max-width: 590px;
-  padding: 10px;
+  padding: 5px;
   display: flex;
   margin: 0 auto;
   border: 1px solid #dad7d7;
@@ -85,10 +91,49 @@ li {
   cursor: pointer;
 }
 
-.question-info {
+.question-header {
+  margin: 10px;
+  flex-direction: column;
+  background-color: #eeeeee;
+  padding: 10px;
+  border-radius: 3px;
+  color: #aaaaaa;
+}
+
+.question-data {
   margin: 10px;
   display: flex;
   flex-direction: column;
+}
+
+.question-votes {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.one-circle {
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+  background: #eeee;
+  border: 3px solid #666;
+  color: #666;
+  text-align: center;
+  font: 12px Arial, sans-serif;
+}
+
+.two-circle {
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+  background: #eeee;
+  border: 3px solid #666;
+  color: #666;
+  text-align: center;
+  font: 12px Arial, sans-serif;
 }
 
 /* Hacky but less typing in the video */

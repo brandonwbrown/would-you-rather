@@ -15,7 +15,7 @@ class Login extends Component {
     if (event.target.value){
       this.props.dispatch(setAuthedUser(event.target.value))
     }
-  };
+  }
 
   handleLoginClick = (e) => {
     e.preventDefault();
