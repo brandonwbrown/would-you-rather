@@ -39,6 +39,11 @@ class Nav extends Component {
                 </NavLink>
               </li>
               <li>
+                <NavLink to='/leaderboard' activeClassName='active'>
+                  Leaderboard
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to='/login' activeClassName='active' onClick={(e) => this.handleLogout(e)}>
                   Logout
                 </NavLink>
@@ -50,7 +55,7 @@ class Nav extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser, users}) {
+function mapStateToProps ({ authedUser, users }) {
   return {
     authedUser: authedUser,
     users: users

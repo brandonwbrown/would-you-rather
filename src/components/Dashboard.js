@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
+import Nav from './Nav'
 import { Redirect } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
-import Nav from './Nav'
 
 
 class Dashboard extends Component {
