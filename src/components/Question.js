@@ -28,6 +28,7 @@ class Question extends Component {
                 <div>{formatDate(timestamp)}</div>
             </div>
             <table width="100%" className="question-votes; border-collapse: separate; border-spacing: 10px 20px;">
+              <tbody>
                 <tr>
                   <th></th>
                   <th></th>
@@ -43,6 +44,7 @@ class Question extends Component {
                   <td width="20%"></td>
                   <td align="center" className="two-circle">{optionTwo.votes.length}</td>
                 </tr>
+              </tbody>
             </table>
         </Link>
         </Fragment>

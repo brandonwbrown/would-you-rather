@@ -18,12 +18,15 @@ class Nav extends Component {
         <Fragment>
           <nav className='nav'>
             <ul>
-              <li>
-                <img
-                  src={users.users[authedUser].avatarURL}
-                  alt={`Avatar of ${authedUser}`}
-                  className='avatar'
-                />
+              <li className="figure">
+                <figure>
+                  <img
+                    src={users.users[authedUser].avatarURL}
+                    alt={`Avatar of ${authedUser}`}
+                    className='avatar'
+                  />
+                <figcaption>Welcome {authedUser}</figcaption>
+                </figure>
               </li>
               <li>
                 <NavLink to='/' exact activeClassName='active'>
