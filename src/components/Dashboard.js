@@ -12,7 +12,7 @@ class Dashboard extends Component {
   }
 
   state = {
-    displayQuestions: "Unanswered",
+    display: "Unanswered",
     questions: []
   }
 
@@ -20,7 +20,7 @@ class Dashboard extends Component {
 
   handleDisplayChange = (event) => {
     if(event.target.value){
-      this.setState({displayQuestions: event.target.value})
+      this.setState({display: event.target.value})
     }
   }
 
@@ -58,7 +58,7 @@ class Dashboard extends Component {
             <div>
               <h3 className='center'>Ze Questions</h3>
               <div className='center'>
-                <select value={this.state.displayQuestions} onChange={(e) => this.handleDisplayChange(e)}>
+                <select value={this.state.display} onChange={(e) => this.handleDisplayChange(e)}>
                   {this.displayChoices.map((item) => {
                     return <option key={item} value={item}>{item}</option>
                   })}
@@ -68,7 +68,7 @@ class Dashboard extends Component {
                 {questionIds ? Object
                   .values(questionIds)
                   .filter((q) => {
-                    return this.shouldDisplay(q, this.state.displayQuestions, authedUser)
+                    return this.shouldDisplay(q, this.state.display, authedUser)
                   }).map((q) => {
                     return (
                         <li key={q.id}>

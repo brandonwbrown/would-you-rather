@@ -3,15 +3,12 @@ import { connect } from 'react-redux'
 import User from './User'
 import Nav from './Nav'
 import { Redirect } from 'react-router-dom'
-import { handleInitialData } from '../actions/shared'
 
 
 class Leaderboard extends Component {
 
   render() {
     const { authedUser, users } = this.props
-    console.log("LB users:"+users)
-    let rank = 0
 
     return (
       <div>
@@ -32,11 +29,12 @@ class Leaderboard extends Component {
                       : 0)
                     )
                   })
-                  .map((u) => {
-                  console.log("User:"+JSON.stringify(u))
+                  .map((u, index) => {
+                  var rank = index + 1
+                  console.log("User:"+rank+JSON.stringify(u))
                   return (
                       <li key={u.id}>
-                        <User id={u.id} user={u} rank={this.rank++}/>
+                        <User id={u.id} user={u} rank={rank}/>
                       </li>)
                   })
                 : null
