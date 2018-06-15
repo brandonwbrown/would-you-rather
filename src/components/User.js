@@ -1,6 +1,12 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+
 
 class User extends Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+    rank: PropTypes.number.isRequired
+  }
 
   render() {
     const { user, rank } = this.props

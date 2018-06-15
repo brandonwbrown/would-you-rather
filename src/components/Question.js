@@ -2,9 +2,15 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
+import PropTypes from 'prop-types'
 
 
 class Question extends Component {
+
+  static propTypes = {
+    question: PropTypes.object.isRequired,
+    users: PropTypes.object.isRequired
+  }
 
   render() {
     const { question, users} = this.props
