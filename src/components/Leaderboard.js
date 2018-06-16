@@ -31,7 +31,6 @@ class Leaderboard extends Component {
                   })
                   .map((u, index) => {
                   var rank = index + 1
-                  console.log("User:"+rank+JSON.stringify(u))
                   return (
                       <li key={u.id}>
                         <User id={u.id} user={u} rank={rank}/>

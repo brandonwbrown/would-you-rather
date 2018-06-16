@@ -28,19 +28,22 @@ class Dashboard extends Component {
     if(display === "All"){
       return true
     }else if(display === "Answered"){
-      if(question.optionOne.votes.indexOf(authedUser) >= 0 ||
-          question.optionTwo.votes.indexOf(authedUser) >= 0){
-        return true
-      }else{
-        return false
-      }
+      return(question.optionOne.votes.indexOf(authedUser) >= 0 ||
+          question.optionTwo.votes.indexOf(authedUser) >= 0)
     }else if(display === "Unanswered"){
-      if(question.optionOne.votes.indexOf(authedUser) < 0 &&
-          question.optionTwo.votes.indexOf(authedUser) < 0){
-        return true
-      }else{
-        return false
-      }
+      return(question.optionOne.votes.indexOf(authedUser) < 0 &&
+          question.optionTwo.votes.indexOf(authedUser) < 0)
+    }else{
+      return false
+    }
+  }
+
+  canVote = (question, authedUser, display) => {
+    if(display === "Unanswered"){
+      return true
+    }else if(display === "All"){
+      return (question.optionOne.votes.indexOf(authedUser) < 0 &&
+        question.optionTwo.votes.indexOf(authedUser) < 0)
     }else{
       return false
     }
@@ -72,7 +75,11 @@ class Dashboard extends Component {
                   }).map((q) => {
                     return (
                         <li key={q.id}>
-                          <Question id={q.id} question={q} users={users}/>
+                          <Question
+                            id={q.id}
+                            question={q}
+                            users={users}
+                            unanswered={this.canVote(q, authedUser, this.state.display)}/>
                         </li>)
                       })
                   : null

@@ -2,20 +2,26 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
-import PropTypes from 'prop-types'
+import { handleSaveQuestionAnswer } from '../actions/shared'
 
 
 class Question extends Component {
 
-  static propTypes = {
-    question: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired
+  handleVote = (e, value) => {
+    e.preventDefault()
+
+    const { dispatch, question, authedUser } = this.props
+    dispatch(handleSaveQuestionAnswer({
+      id: question.id,
+      authedUser: authedUser,
+      answer: value
+    }))
   }
 
   render() {
-    const { question, users} = this.props
+    const { question, users, unanswered, authedUser } = this.props
 
-    if (question === null) {
+    if (question === undefined) {
       return <p>This Question does not yet exist.</p>
     }
 
@@ -42,13 +48,29 @@ class Question extends Component {
                 </tr>
                 <tr>
                   <td>{optionOne.text}</td>
-                  <td width="20%"></td>
+                  { unanswered ?
+                    <td width="20%">
+                      <button onClick={(e) => this.handleVote.bind(e, 'optionOne')}>
+                        Vote
+                      </button>
+                    </td>
+                  :
+                    <td width="20%"></td>
+                  }
                   <td align="center" className="one-circle">{optionOne.votes.length}</td>
                 </tr>
                 <tr>
                   <td>{optionTwo.text}</td>
-                  <td width="20%"></td>
-                  <td align="center" className="two-circle">{optionTwo.votes.length}</td>
+                    { unanswered ?
+                      <td width="20%">
+                        <button onClick={(e) => this.handleVote.bind(e, 'optionTwo')}>
+                          Vote
+                        </button>
+                      </td>
+                    :
+                      <td width="20%"></td>
+                    }
+                    <td align="center" className="two-circle">{optionTwo.votes.length}</td>
                 </tr>
               </tbody>
             </table>
@@ -58,10 +80,13 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser, users}) {
+function mapStateToProps ({ questions, authedUser, users}, { id }) {
+  const question = questions.questions[id]
+
   return {
     authedUser: authedUser,
-    users: users
+    users: users,
+    question: question
   }
 }
 
