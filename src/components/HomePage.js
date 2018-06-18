@@ -14,9 +14,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const { authedUser, match } = this.props
-
-    console.log("Home match:"+JSON.stringify(match))
+    const { authedUser } = this.props
 
     return (
       <div>

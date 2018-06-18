@@ -21,9 +21,9 @@ export function getInitialUsers () {
   }))
 }
 
-export function saveQuestionAnswer() {
+export function saveQuestionAnswer(info) {
   return Promise.all([
-    _saveQuestionAnswer(),
+    _saveQuestionAnswer(info),
   ]).then(([questions]) => ({
     questions
   }))

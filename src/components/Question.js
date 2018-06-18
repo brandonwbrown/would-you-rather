@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
@@ -9,10 +9,10 @@ class Question extends Component {
 
   handleVote = (e, value) => {
     e.preventDefault()
-
     const { dispatch, question, authedUser } = this.props
+    console.log(authedUser+" VOTING for: "+value+" on :"+question.id)
     dispatch(handleSaveQuestionAnswer({
-      id: question.id,
+      qid: question.id,
       authedUser: authedUser,
       answer: value
     }))
@@ -29,8 +29,8 @@ class Question extends Component {
 
 
     return (
-        <Fragment>
-          <Link to={`/question/${id}`} className='question'>
+      <div className="question">
+          <Link to={`/question/${id}`}>
             <div className='question-header'>
               <img
                 src={users.users[author].avatarURL}
@@ -40,43 +40,43 @@ class Question extends Component {
             <span>by: {author}</span>
                 <div>{formatDate(timestamp)}</div>
             </div>
-            <table width="100%" className="question-votes; border-collapse: separate; border-spacing: 10px 20px;">
-              <tbody>
-                <tr>
-                  <th></th>
-                  <th></th>
-                  <th align="center">Votes</th>
-                </tr>
-                <tr>
-                  <td>{optionOne.text}</td>
+          </Link>
+          <table width="100%" className="question-votes; border-collapse: separate; border-spacing: 10px 20px;">
+            <tbody>
+              <tr>
+                <th></th>
+                <th></th>
+                <th align="center">Votes</th>
+              </tr>
+              <tr>
+                <td>{optionOne.text}</td>
+                { unanswered ?
+                  <td width="20%">
+                    <button onClick={(e) => this.handleVote(e, 'optionOne')}>
+                      Vote
+                    </button>
+                  </td>
+                :
+                  <td width="20%"></td>
+                }
+                <td align="center" className="one-circle">{optionOne.votes.length}</td>
+              </tr>
+              <tr>
+                <td>{optionTwo.text}</td>
                   { unanswered ?
                     <td width="20%">
-                      <button onClick={(e) => this.handleVote.bind(e, 'optionOne')}>
+                      <button onClick={(e) => this.handleVote.bind(e, 'optionTwo')}>
                         Vote
                       </button>
                     </td>
                   :
                     <td width="20%"></td>
                   }
-                  <td align="center" className="one-circle">{optionOne.votes.length}</td>
-                </tr>
-                <tr>
-                  <td>{optionTwo.text}</td>
-                    { unanswered ?
-                      <td width="20%">
-                        <button onClick={(e) => this.handleVote.bind(e, 'optionTwo')}>
-                          Vote
-                        </button>
-                      </td>
-                    :
-                      <td width="20%"></td>
-                    }
-                    <td align="center" className="two-circle">{optionTwo.votes.length}</td>
-                </tr>
-              </tbody>
-            </table>
-        </Link>
-        </Fragment>
+                  <td align="center" className="two-circle">{optionTwo.votes.length}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
     )
   }
 }

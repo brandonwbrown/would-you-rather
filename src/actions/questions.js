@@ -10,10 +10,10 @@ export function receiveQuestions (questions) {
   }
 }
 
-export function voteForQuestion ({ id, authedUser, answer}) {
+export function voteForQuestion ({ qid, authedUser, answer}) {
   return {
     type: VOTE_4_QUESTION,
-    id,
+    qid,
     authedUser,
     answer
   }
