@@ -8,7 +8,6 @@ class Leaderboard extends Component {
 
   render() {
     const { authedUser, users } = this.props
-    console.log("rendering leaderboard")
     return (
       <div>
         {authedUser ?

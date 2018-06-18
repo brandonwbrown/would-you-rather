@@ -13,7 +13,7 @@ class Nav extends Component {
 
   render() {
     const { authedUser, userIds } = this.props
-    console.log(authedUser+userIds)
+
     return (
         <Fragment>
           <nav className='nav'>

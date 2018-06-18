@@ -24,7 +24,7 @@ export function getInitialUsers () {
 export function saveQuestionAnswer(info) {
   return Promise.all([
     _saveQuestionAnswer(info),
-  ]).then(([questions]) => ({
-    questions
-  }))
+  ]).then(([questions]) => {
+    {questions}
+  })
 }

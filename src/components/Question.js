@@ -9,8 +9,9 @@ class Question extends Component {
 
   handleVote = (e, value) => {
     e.preventDefault()
+
     const { dispatch, question, authedUser } = this.props
-    console.log(authedUser+" VOTING for: "+value+" on :"+question.id)
+
     dispatch(handleSaveQuestionAnswer({
       qid: question.id,
       authedUser: authedUser,
@@ -65,7 +66,7 @@ class Question extends Component {
                 <td>{optionTwo.text}</td>
                   { unanswered ?
                     <td width="20%">
-                      <button onClick={(e) => this.handleVote.bind(e, 'optionTwo')}>
+                      <button onClick={(e) => this.handleVote(e, 'optionTwo')}>
                         Vote
                       </button>
                     </td>

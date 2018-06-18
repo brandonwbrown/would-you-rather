@@ -1,5 +1,5 @@
 import { getInitialData, getInitialUsers, saveQuestionAnswer } from '../utils/api'
-import { receiveUsers } from '../actions/users'
+import { receiveUsers, updateUserAnswer } from '../actions/users'
 import { receiveQuestions, handleVote } from '../actions/questions'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
@@ -27,11 +27,11 @@ export function handleInitialData () {
 }
 
 export function handleSaveQuestionAnswer (info){
-  console.log("Info is:"+JSON.stringify(info))
   return (dispatch) => {
     dispatch(showLoading())
-    dispatch(handleVote(info)) // update store
-    return saveQuestionAnswer(info) //API call
+    dispatch(handleVote(info))
+    dispatch(updateUserAnswer(info))
+    return saveQuestionAnswer(info)
       .then((questions) => {
         dispatch(receiveQuestions(questions))
         dispatch(hideLoading())
