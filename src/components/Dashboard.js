@@ -1,15 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
-import Nav from './Nav'
 import { Redirect } from 'react-router-dom'
-import { handleInitialData } from '../actions/shared'
 
 
 class Dashboard extends Component {
-  componentDidMount() {
-    this.props.dispatch(handleInitialData())
-  }
 
   state = {
     display: "Unanswered",
@@ -57,7 +52,6 @@ class Dashboard extends Component {
       <div>
         {authedUser ?
           <Fragment>
-            <Nav/>
             <div>
               <h3 className='center'>Ze Questions</h3>
               <div className='center'>

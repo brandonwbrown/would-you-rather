@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import User from './User'
-import Nav from './Nav'
 import { Redirect } from 'react-router-dom'
 
 
@@ -9,12 +8,11 @@ class Leaderboard extends Component {
 
   render() {
     const { authedUser, users } = this.props
-
+    console.log("rendering leaderboard")
     return (
       <div>
         {authedUser ?
           <Fragment>
-            <Nav/>
             <div>
               <h3 className='center'>Leaders</h3>
               <ul className='dashboard-list'>

@@ -27,6 +27,7 @@ class Question extends Component {
 
     const { id, author, timestamp, optionOne, optionTwo  } = question
 
+
     return (
         <Fragment>
           <Link to={`/question/${id}`} className='question'>

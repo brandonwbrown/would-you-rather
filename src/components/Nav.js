@@ -12,8 +12,8 @@ class Nav extends Component {
   }
 
   render() {
-    const { authedUser, users } = this.props
-
+    const { authedUser, userIds } = this.props
+    console.log(authedUser+userIds)
     return (
         <Fragment>
           <nav className='nav'>
@@ -21,7 +21,7 @@ class Nav extends Component {
               <li className="figure">
                 <figure>
                   <img
-                    src={users.users[authedUser].avatarURL}
+                    src={userIds[authedUser].avatarURL}
                     alt={`Avatar of ${authedUser}`}
                     className='avatar'
                   />
@@ -58,7 +58,7 @@ class Nav extends Component {
 function mapStateToProps ({ authedUser, users }) {
   return {
     authedUser: authedUser,
-    users: users
+    userIds: users.users
   }
 }
 

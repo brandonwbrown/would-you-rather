@@ -2,9 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { connect } from 'react-redux'
 import Login from './Login'
-import Dashboard from './Dashboard'
-import Question from './Question'
-import Leaderboard from './Leaderboard'
+import HomePage from './HomePage'
 import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
@@ -18,9 +16,7 @@ class App extends Component {
             <h1 className="center">Would You Rather?</h1>
             <Switch>
               <Route path='/login' exact component={Login} />
-              <Route path='/leaderboard' exact component={Leaderboard} />
-              <Route path='/question/:id' component={Question} />
-              <Route path='/' exact component={Dashboard} />
+              <Route path='/' component={HomePage}/>
             </Switch>
           </div>
         </Fragment>
@@ -28,9 +24,10 @@ class App extends Component {
     )
   }
 }
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ authedUser, users }) {
   return {
-    authedUser: authedUser
+    authedUser: authedUser,
+    users: users
   }
 }
 export default connect(mapStateToProps)(App)
