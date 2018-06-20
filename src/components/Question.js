@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
 import { handleSaveQuestionAnswer } from '../actions/shared'
+import { Button, Label } from 'react-bootstrap'
+
 
 
 class Question extends Component {
@@ -19,8 +21,13 @@ class Question extends Component {
     }))
   }
 
+  drawCheckmark = (option) => {
+    const { question, authedUser } = this.props
+    return question[option].votes.indexOf(authedUser) >= 0
+  }
+
   render() {
-    const { question, users, unanswered, authedUser } = this.props
+    const { question, users, unanswered } = this.props
 
     if (question === undefined) {
       return <p>This Question does not yet exist.</p>
@@ -38,42 +45,52 @@ class Question extends Component {
                 alt={`Avatar of ${author}`}
                 className='avatar'
               />
-            <span>by: {author}</span>
+            <span>{author}</span>
                 <div>{formatDate(timestamp)}</div>
             </div>
           </Link>
           <table width="100%" className="question-votes; border-collapse: separate; border-spacing: 10px 20px;">
             <tbody>
               <tr>
-                <th></th>
-                <th></th>
-                <th align="center">Votes</th>
+                { unanswered ?
+                  <th>Would you rather?</th>
+                  : <th>You would rather:</th>}
+                { !unanswered ? <th align="center">Votes</th> : <th></th>}
               </tr>
               <tr>
-                <td>{optionOne.text}</td>
+                <td>{this.drawCheckmark('optionOne') ?
+                    <img src='./static/checkmark.png' height="15" width="15" alt=''/>
+                  : null }
+                  {optionOne.text}
+                </td>
                 { unanswered ?
-                  <td width="20%">
-                    <button onClick={(e) => this.handleVote(e, 'optionOne')}>
-                      Vote
-                    </button>
+                  <td width="40%">
+                    <Button bsStyle="primary" bsSize="small" onClick={(e) => this.handleVote(e, 'optionOne')}>Vote</Button>
                   </td>
                 :
-                  <td width="20%"></td>
+                <td width="40%">
+                  <h4 align="center">
+                    <Label bsSize="small">{optionOne.votes.length}</Label>
+                  </h4>
+                </td>
                 }
-                <td align="center" className="one-circle">{optionOne.votes.length}</td>
               </tr>
               <tr>
-                <td>{optionTwo.text}</td>
+                <td>{this.drawCheckmark('optionTwo') ?
+                    <img src='./static/checkmark.png' height="15" width="15" alt=''/>
+                  : null }
+                  {optionOne.text}
+                </td>
                   { unanswered ?
-                    <td width="20%">
-                      <button onClick={(e) => this.handleVote(e, 'optionTwo')}>
-                        Vote
-                      </button>
+                    <td width="40%">
+                      <Button bsStyle="danger" bsSize="small" onClick={(e) => this.handleVote(e, 'optionTwo')}>Vote</Button>
                     </td>
                   :
-                    <td width="20%"></td>
-                  }
-                  <td align="center" className="two-circle">{optionTwo.votes.length}</td>
+                  <td width="40%">
+                    <h4 align="center">
+                      <Label bsSize="small">{optionTwo.votes.length}</Label>
+                    </h4>
+                  </td>                  }
               </tr>
             </tbody>
           </table>

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialUsers } from '../actions/shared'
 import { setAuthedUser } from '../actions/authedUser'
-import Button from 'react-bootstrap/lib/Button';
+import { Button, Label } from 'react-bootstrap';
 
 
 class Login extends Component {
@@ -30,22 +30,21 @@ class Login extends Component {
     Array.prototype.forEach.call(names, (n) => (logins.push(n)))
 
     return (
-      <div>
-        <div>
-          <h3 className="center">Please login.</h3>
-        </div>
+      <Fragment>
+        <div><hr></hr></div>
         <div className="center">
+          <Label>Please login: </Label>
           <select value={authedUser} onChange={(e) => this.handleLoginChange(e)}>
             <option value="">Choose a name...</option>
             {logins.map((item) => {
               return <option key={item} value={item}>{item}</option>
             })}
           </select>
-          <div className="center">
-            <Button bsStyle="primary" onClick={this.handleLoginClick}>Go</Button>
-          </div>
         </div>
-      </div>
+        <div className="center">
+          <Button bsStyle="primary" bsSize="small" onClick={this.handleLoginClick}>Go</Button>
+        </div>
+      </Fragment>
     )
   }
 }

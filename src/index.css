@@ -48,7 +48,7 @@ a {
 }
 
 .figure {
-  padding: 0px;
+  padding-left: 10px;
 }
 
 .nav ul {
@@ -58,14 +58,13 @@ a {
   text-decoration: none;
   background-color: #eeeeee;
   border-radius: 3px;
+  width: 100%;
+  justify-content: right;
 }
 
 .nav li:first-child {
-  padding-left: 0;
-}
-
-.nav li:last-child {
-  justify-content: right;
+  padding-left: 30;
+  justify-content: left;
 }
 
 ul {

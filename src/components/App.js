@@ -5,6 +5,7 @@ import Login from './Login'
 import HomePage from './HomePage'
 import LoadingBar from 'react-redux-loading'
 
+
 class App extends Component {
 
   render() {
