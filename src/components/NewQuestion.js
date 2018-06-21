@@ -1,17 +1,10 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { handleAddQuestion } from '../actions/questions'
-import { getInitialData } from '../utils/api'
-import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
-import PropTypes from 'prop-types'
 
 
 class NewQuestion extends Component {
-
-  static propTypes = {
-    authedUser: PropTypes.string.isRequired,
-  }
 
   state = {
     optionOneText: '',
@@ -19,19 +12,11 @@ class NewQuestion extends Component {
     toHome: false
   }
 
-  handleOneChange = (e) => {
+  handleChange = (option, e) => {
     const text = e.target.value
 
     this.setState(() => ({
-      optionOneText: text
-    }))
-  }
-
-  handleTwoChange = (e) => {
-    const text = e.target.value
-
-    this.setState(() => ({
-      optionTwoText: text
+      [option]: text
     }))
   }
 
@@ -39,9 +24,9 @@ class NewQuestion extends Component {
     e.preventDefault()
 
     const { optionOneText, optionTwoText } = this.state
-    const { dispatch, authedUser, id } = this.props
+    const { dispatch, id } = this.props
 
-    dispatch(handleAddQuestion(optionOneText, optionTwoText, authedUser))
+    dispatch(handleAddQuestion(optionOneText, optionTwoText))
 
     this.setState(() => ({
       optionOneText: '',
@@ -61,33 +46,31 @@ class NewQuestion extends Component {
     return (
       <div>
         {authedUser ?
-          <Fragment>
-            <div>
-              <h3 className='center'>Would You Rather...</h3>
-                <form className='new-question' onSubmit={this.handleSubmit}>
-                  <label>Option 1</label><textarea
-                    placeholder="Option 1 text"
-                    value={this.state.optionOneText}
-                    onChange={this.handleOneChange}
-                    className='textarea'
-                    maxLength={280}
-                  />
-                <label>Option 2</label><textarea
-                    placeholder="Option 2 text"
-                    value={this.state.optionTwoText}
-                    onChange={this.handleTwoChange}
-                    className='textarea'
-                    maxLength={280}
-                  />
-                  <button
-                    className='btn'
-                    type='submit'
-                    disabled={optionOneText === '' || optionTwoText === ''}>
-                      Submit
-                  </button>
-                </form>
-            </div>
-          </Fragment>
+          <div>
+            <h3 className='center'>Would You Rather...</h3>
+            <form className='new-question' onSubmit={this.handleSubmit}>
+              <label>Option 1</label><textarea
+                placeholder="Option 1 text"
+                value={this.state.optionOneText}
+                onChange={(e) => this.handleChange('optionOneText', e)}
+                className='textarea'
+                maxLength={280}
+              />
+            <label>Option 2</label><textarea
+                placeholder="Option 2 text"
+                value={this.state.optionTwoText}
+                onChange={(e) => this.handleChange('optionTwoText', e)}
+                className='textarea'
+                maxLength={280}
+              />
+              <button
+                className='btn'
+                type='submit'
+                disabled={optionOneText === '' || optionTwoText === ''}>
+                  Submit
+              </button>
+            </form>
+          </div>
           :
           <Redirect to='/login' />
         }

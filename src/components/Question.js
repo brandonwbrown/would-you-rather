@@ -78,7 +78,7 @@ class Question extends Component {
                 <td>{this.drawCheckmark('optionTwo') ?
                     <img src='./static/checkmark.png' height="15" width="15" alt=''/>
                   : null }
-                  {optionOne.text}
+                  {optionTwo.text}
                 </td>
                   { unanswered ?
                     <td width="40%">

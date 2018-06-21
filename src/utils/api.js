@@ -30,11 +30,8 @@ export function saveQuestionAnswer(info) {
 }
 
 export function saveNewQuestion(info) {
-  return Promise.all([
-    _saveQuestion(info),
-  ])
-  .then(_getQuestions())
-  .then(([questions]) => {
-    {questions}
+  return _saveQuestion(info)
+  .then((question) => {
+    return question
   })
 }

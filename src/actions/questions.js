@@ -1,5 +1,4 @@
 import { saveQuestionAnswer, saveNewQuestion } from '../utils/api'
-import { formatQuestion } from '../utils/helpers'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 
@@ -30,27 +29,12 @@ export function addQuestion (question) {
   }
 }
 
-// export function handleAddQuestion (optionOneText, optionTwoText) {
-//   return (dispatch, getState) => {
-//     dispatch(showLoading())
-//     dispatch(addQuestion())
-//
-//     return saveNewQuestion({})
-//       .catch((e) => {
-//         console.warn('Error in handleVote: ', e)
-//         //dispatch(restoreQuestion(info))
-//         // TODO on API error we need to revert the question back to original state
-//         alert('The was an error voting on the question. Try again.')
-//       })
-//   }
-// }
-
 export function handleAddQuestion (optionOneText, optionTwoText) {
   return (dispatch, getState) => {
     const { authedUser } = getState()
 
     dispatch(showLoading())
-
+    console.log(optionOneText+" "+optionTwoText+" "+authedUser)
     return saveNewQuestion({
       optionOneText,
       optionTwoText,
@@ -68,7 +52,6 @@ export function handleVote (info) {
     return saveQuestionAnswer(info)
       .catch((e) => {
         console.warn('Error in handleVote: ', e)
-        //dispatch(restoreQuestion(info))
         // TODO on API error we need to revert the question back to original state
         alert('The was an error voting on the question. Try again.')
       })
