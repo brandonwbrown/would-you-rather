@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS, VOTE_4_QUESTION } from '../actions/questions'
+import { RECEIVE_QUESTIONS, VOTE_4_QUESTION, ADD_QUESTION } from '../actions/questions'
 
 export default function questions (state = {}, action) {
   switch(action.type) {
@@ -12,15 +12,23 @@ export default function questions (state = {}, action) {
          ...state,
          questions: {
            ...state.questions,
-           [action.qid]: {
-             ...state.questions[action.qid],
+           [action.id]: {
+             ...state.questions[action.id],
              [action.answer] : {
-               ...state.questions[action.qid][action.answer],
+               ...state.questions[action.id][action.answer],
                votes: state
-                .questions[action.qid][action.answer]
+                .questions[action.id][action.answer]
                 .votes.concat(action.authedUser)
              }
            }
+         }
+       }
+     case ADD_QUESTION: // just return the state, the server has the data.
+       return {
+         ...state,
+         questions: {
+           ...state.questions,
+           [action.question.id] : action.question
          }
        }
     default :

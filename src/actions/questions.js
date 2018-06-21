@@ -1,7 +1,11 @@
-import { saveQuestionAnswer } from '../utils/api'
+import { saveQuestionAnswer, saveNewQuestion } from '../utils/api'
+import { formatQuestion } from '../utils/helpers'
+import { showLoading, hideLoading } from 'react-redux-loading'
+
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const VOTE_4_QUESTION = 'VOTE_4_QUESTION'
+export const ADD_QUESTION = 'ADD_QUESTION'
 
 export function receiveQuestions (questions) {
   return {
@@ -10,12 +14,50 @@ export function receiveQuestions (questions) {
   }
 }
 
-export function voteForQuestion ({ qid, authedUser, answer}) {
+export function voteForQuestion ({ id, authedUser, answer}) {
   return {
     type: VOTE_4_QUESTION,
-    qid,
+    id,
     authedUser,
     answer
+  }
+}
+
+export function addQuestion (question) {
+  return {
+    type: ADD_QUESTION,
+    question
+  }
+}
+
+// export function handleAddQuestion (optionOneText, optionTwoText) {
+//   return (dispatch, getState) => {
+//     dispatch(showLoading())
+//     dispatch(addQuestion())
+//
+//     return saveNewQuestion({})
+//       .catch((e) => {
+//         console.warn('Error in handleVote: ', e)
+//         //dispatch(restoreQuestion(info))
+//         // TODO on API error we need to revert the question back to original state
+//         alert('The was an error voting on the question. Try again.')
+//       })
+//   }
+// }
+
+export function handleAddQuestion (optionOneText, optionTwoText) {
+  return (dispatch, getState) => {
+    const { authedUser } = getState()
+
+    dispatch(showLoading())
+
+    return saveNewQuestion({
+      optionOneText,
+      optionTwoText,
+      author: authedUser,
+    })
+      .then((question) => dispatch(addQuestion(question)))
+      .then(() => dispatch(hideLoading()))
   }
 }
 

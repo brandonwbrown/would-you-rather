@@ -1,8 +1,8 @@
 import {
   _getUsers,
   _getQuestions,
-// TODO  _saveQuestion,
- _saveQuestionAnswer,
+  _saveQuestion,
+  _saveQuestionAnswer,
 } from './_DATA.js'
 
 export function getInitialData () {
@@ -25,6 +25,16 @@ export function saveQuestionAnswer(info) {
   return Promise.all([
     _saveQuestionAnswer(info),
   ]).then(([questions]) => {
+    {questions}
+  })
+}
+
+export function saveNewQuestion(info) {
+  return Promise.all([
+    _saveQuestion(info),
+  ])
+  .then(_getQuestions())
+  .then(([questions]) => {
     {questions}
   })
 }

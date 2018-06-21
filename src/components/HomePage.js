@@ -5,6 +5,7 @@ import Question from './Question'
 import Nav from './Nav'
 import Leaderboard from './Leaderboard'
 import Dashboard from './Dashboard'
+import NewQuestion from './NewQuestion'
 import { handleInitialData } from '../actions/shared'
 
 
@@ -23,6 +24,7 @@ class HomePage extends Component {
             <Nav/>
             <Switch>
               <Route path='/leaderboard' component={Leaderboard} />
+              <Route path='/add' exact component={NewQuestion} />
               <Route path='/question/:id' component={Question} />
               <Route path='/' exact component={Dashboard} />
             </Switch>

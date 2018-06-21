@@ -8,10 +8,10 @@ export function receiveUsers (users) {
   }
 }
 
-export function updateUserAnswer ({ qid, authedUser, answer}) {
+export function updateUserAnswer ({ id, authedUser, answer}) {
   return {
     type: UPDATE_USER_ANSWER,
-    qid,
+    id,
     authedUser,
     answer
   }

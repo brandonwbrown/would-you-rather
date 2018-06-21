@@ -15,7 +15,7 @@ class Question extends Component {
     const { dispatch, question, authedUser } = this.props
 
     dispatch(handleSaveQuestionAnswer({
-      qid: question.id,
+      id: question.id,
       authedUser: authedUser,
       answer: value
     }))
@@ -34,7 +34,6 @@ class Question extends Component {
     }
 
     const { id, author, timestamp, optionOne, optionTwo  } = question
-
 
     return (
       <div className="question">
