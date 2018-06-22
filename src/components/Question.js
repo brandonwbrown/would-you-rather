@@ -6,8 +6,6 @@ import { handleSaveQuestionAnswer } from '../actions/shared'
 import { Button, Label } from 'react-bootstrap'
 
 
-
-
 class Question extends Component {
 
   handleVote = (e, value) => {

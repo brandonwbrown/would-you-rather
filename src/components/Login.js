@@ -24,6 +24,10 @@ class Login extends Component {
   }
 
   render() {
+    // TODO:
+    // I shouldn't need to create this array like this
+    // I should be able to just use users but the API is giving me
+    // users.users
     const { users, authedUser } = this.props
     const names = Object.keys((users || {}).users || {})
     const logins = []
@@ -48,10 +52,12 @@ class Login extends Component {
     )
   }
 }
+
 function mapStateToProps ({ authedUser, users }) {
   return {
     loading: users === null,
     users: users
   }
 }
+
 export default connect(mapStateToProps)(Login)

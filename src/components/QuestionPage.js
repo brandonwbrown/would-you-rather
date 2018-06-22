@@ -20,7 +20,7 @@ class QuestionPage extends Component {
   render() {
     const { authedUser, id, users, questions } = this.props
     const  question  = questions[id]
-    console.log("qs:"+JSON.stringify(question))
+
     return (
       <div>
         {authedUser ?

@@ -25,6 +25,8 @@ export function saveQuestionAnswer(info) {
   return Promise.all([
     _saveQuestionAnswer(info),
   ]).then(([questions]) => {
+    //TODO: not sure why I need to deconstruct this,
+    // related to users.users issue with API
     {questions}
   })
 }

@@ -25,10 +25,12 @@ class App extends Component {
     )
   }
 }
+
 function mapStateToProps ({ authedUser, users }) {
   return {
     authedUser: authedUser,
     users: users
   }
 }
+
 export default connect(mapStateToProps)(App)

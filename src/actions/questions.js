@@ -1,7 +1,6 @@
 import { saveQuestionAnswer, saveNewQuestion } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
-
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const VOTE_4_QUESTION = 'VOTE_4_QUESTION'
 export const ADD_QUESTION = 'ADD_QUESTION'
@@ -34,7 +33,7 @@ export function handleAddQuestion (optionOneText, optionTwoText) {
     const { authedUser } = getState()
 
     dispatch(showLoading())
-    console.log(optionOneText+" "+optionTwoText+" "+authedUser)
+
     return saveNewQuestion({
       optionOneText,
       optionTwoText,

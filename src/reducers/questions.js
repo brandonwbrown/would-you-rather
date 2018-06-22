@@ -23,7 +23,7 @@ export default function questions (state = {}, action) {
            }
          }
        }
-     case ADD_QUESTION: // just return the state, the server has the data.
+     case ADD_QUESTION:
        return {
          ...state,
          questions: {
