@@ -28,7 +28,7 @@ class Question extends Component {
   getPercent = (one, two) => {
     if (two === 0) return 100
     if (one === 0) return 0
-    return Math.floor(one/two*100)
+    return Math.floor(one/(one+two)*100)
   }
 
   render() {
