@@ -7,6 +7,7 @@ import { Button, Label } from 'react-bootstrap'
 
 
 
+
 class Question extends Component {
 
   handleVote = (e, value) => {
@@ -26,6 +27,12 @@ class Question extends Component {
     return question[option].votes.indexOf(authedUser) >= 0
   }
 
+  getPercent = (one, two) => {
+    if (two === 0) return 100
+    if (one === 0) return 0
+    return Math.floor(one/two*100)
+  }
+
   render() {
     const { question, users, unanswered } = this.props
 
@@ -34,6 +41,10 @@ class Question extends Component {
     }
 
     const { id, author, timestamp, optionOne, optionTwo  } = question
+    const optionOnePercent = this.getPercent(
+                                    optionOne.votes.length,
+                                    optionTwo.votes.length)
+    const optionTwoPercent = 100 - optionOnePercent
 
     return (
       <div className="question">
@@ -58,12 +69,12 @@ class Question extends Component {
                 { unanswered ?
                     <th></th>
                     :
-                    <th align="center">Votes</th>
+                    <th align="center">Votes | %</th>
                 }
               </tr>
               <tr>
                 <td>{this.drawCheckmark('optionOne') ?
-                    <img src='./static/checkmark.png' height="15" width="15" alt=''/>
+                    <img src={require('../static/checkmark.png')} height="15" width="15" alt=''/>
                   : null }
                   {optionOne.text}
                 </td>
@@ -79,14 +90,14 @@ class Question extends Component {
                 :
                 <td width="40%">
                   <h4 align="center">
-                    <Label bsSize="small">{optionOne.votes.length}</Label>
+                    <Label bsSize="small">{optionOne.votes.length} | {optionOnePercent}%</Label>
                   </h4>
                 </td>
                 }
               </tr>
               <tr>
                 <td>{this.drawCheckmark('optionTwo') ?
-                    <img src='./static/checkmark.png' height="15" width="15" alt=''/>
+                    <img src={require('../static/checkmark.png')} height="15" width="15" alt=''/>
                   : null }
                   {optionTwo.text}
                 </td>
@@ -102,7 +113,7 @@ class Question extends Component {
                   :
                   <td width="40%">
                     <h4 align="center">
-                      <Label bsSize="small">{optionTwo.votes.length}</Label>
+                      <Label bsSize="small">{optionTwo.votes.length} | {optionTwoPercent}%</Label>
                     </h4>
                   </td>                  }
               </tr>
