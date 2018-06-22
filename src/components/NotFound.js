@@ -6,12 +6,8 @@ import { handleInitialData } from '../actions/shared'
 
 class NotFound extends Component {
 
-  componentDidMount() {
-    this.props.dispatch(handleInitialData())
-  }
-
   render() {
-    const { authedUser, users } = this.props
+    const { authedUser } = this.props
 
     return (
       <div>
@@ -25,10 +21,9 @@ class NotFound extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser, users }) {
+function mapStateToProps ({ authedUser }) {
   return {
     authedUser: authedUser,
-    users: users
   }
 }
 
