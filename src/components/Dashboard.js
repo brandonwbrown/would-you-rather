@@ -66,7 +66,9 @@ class Dashboard extends Component {
                   .values(questionIds)
                   .filter((q) => {
                     return this.shouldDisplay(q, this.state.display, authedUser)
-                  }).map((q) => {
+                  })
+                  .sort(((a,b,) => b.timestamp - a.timestamp))
+                  .map((q) => {
                     return (
                         <li key={q.id}>
                           <Question

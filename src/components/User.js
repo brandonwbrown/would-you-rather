@@ -21,6 +21,7 @@ class User extends Component {
         <Fragment>
           <div className='rank'>
             <div className='rank-number'>
+              <span>Rank:<br></br></span>
               <span>{rank}</span>
             </div>
               <div className='rank-header'>
@@ -34,6 +35,7 @@ class User extends Component {
               <div className='rank-details'>
                 <p>Questions Asked: {questions.length}</p>
                 <p>Questions Answered: {Object.keys(answers).length}</p>
+                <p>Total: {Object.keys(answers).length + questions.length}</p>
               </div>
             </div>
         </Fragment>

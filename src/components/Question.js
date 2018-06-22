@@ -12,17 +12,17 @@ class Question extends Component {
   handleVote = (e, value) => {
     e.preventDefault()
 
-    const { dispatch, question, authedUser } = this.props
+    const { dispatch, id, authedUser } = this.props
 
     dispatch(handleSaveQuestionAnswer({
-      id: question.id,
+      id: id,
       authedUser: authedUser,
       answer: value
     }))
   }
 
   drawCheckmark = (option) => {
-    const { question, authedUser } = this.props
+    const { authedUser, question } = this.props
     return question[option].votes.indexOf(authedUser) >= 0
   }
 
@@ -37,7 +37,7 @@ class Question extends Component {
 
     return (
       <div className="question">
-          <Link to={`/question/${id}`}>
+          <Link to={`/question/${id}`} className="question">
             <div className='question-header'>
               <img
                 src={users.users[author].avatarURL}
@@ -47,14 +47,19 @@ class Question extends Component {
             <span>{author}</span>
                 <div>{formatDate(timestamp)}</div>
             </div>
-          </Link>
           <table width="100%" className="question-votes; border-collapse: separate; border-spacing: 10px 20px;">
             <tbody>
               <tr>
                 { unanswered ?
-                  <th>Would you rather?</th>
-                  : <th>You would rather:</th>}
-                { !unanswered ? <th align="center">Votes</th> : <th></th>}
+                    <th>Would you rather?</th>
+                    :
+                    <th>You would rather:</th>
+                }
+                { unanswered ?
+                    <th></th>
+                    :
+                    <th align="center">Votes</th>
+                }
               </tr>
               <tr>
                 <td>{this.drawCheckmark('optionOne') ?
@@ -64,7 +69,12 @@ class Question extends Component {
                 </td>
                 { unanswered ?
                   <td width="40%">
-                    <Button bsStyle="primary" bsSize="small" onClick={(e) => this.handleVote(e, 'optionOne')}>Vote</Button>
+                    <Button
+                      bsStyle="primary"
+                      bsSize="small"
+                      onClick={(e) => this.handleVote(e, 'optionOne')}>
+                      Vote
+                    </Button>
                   </td>
                 :
                 <td width="40%">
@@ -82,7 +92,12 @@ class Question extends Component {
                 </td>
                   { unanswered ?
                     <td width="40%">
-                      <Button bsStyle="danger" bsSize="small" onClick={(e) => this.handleVote(e, 'optionTwo')}>Vote</Button>
+                      <Button
+                        bsStyle="danger"
+                        bsSize="small"
+                        onClick={(e) => this.handleVote(e, 'optionTwo')}>
+                        Vote
+                      </Button>
                     </td>
                   :
                   <td width="40%">
@@ -93,6 +108,7 @@ class Question extends Component {
               </tr>
             </tbody>
           </table>
+        </Link>
       </div>
     )
   }
