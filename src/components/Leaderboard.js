@@ -23,7 +23,7 @@ const Leaderboard = ({authedUser, users}) => (
                 )
               })
               .map((u, index) => {
-              var rank = index + 1
+              let rank = index + 1
               return (
                   <li key={u.id}>
                     <User id={u.id} user={u} rank={rank}/>

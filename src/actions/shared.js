@@ -52,7 +52,6 @@ export function handleAddQuestion (optionOneText, optionTwoText) {
     })
       .then((question) => {
         dispatch(addQuestion(question))
-        console.log("before dispatch:"+question.id+authedUser)
         dispatch(updateUserQuestion(question.id, authedUser))
       })
       .then(() => dispatch(hideLoading()))

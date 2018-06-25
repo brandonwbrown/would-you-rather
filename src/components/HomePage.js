@@ -34,10 +34,7 @@ class HomePage extends Component {
             </Switch>
           </Fragment>
           :
-          <Fragment>
-            {console.log("redirecting to login!!!")}
-            <Redirect to='/login' />
-          </Fragment>
+          <Redirect to='/login' />
       }
       </div>
     )

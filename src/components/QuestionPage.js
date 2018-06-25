@@ -1,31 +1,28 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
 import { Redirect, withRouter } from 'react-router-dom'
 
 
-class QuestionPage extends Component {
-
-  canVote = (question, authedUser, display) => {
-    if(display === "Unanswered"){
-      return true
-    }else if(display === "All"){
-      return (question.optionOne.votes.indexOf(authedUser) < 0 &&
-        question.optionTwo.votes.indexOf(authedUser) < 0)
-    }else{
-      return false
-    }
+const canVote = (question, authedUser, display) => {
+  if(display === "Unanswered"){
+    return true
+  }else if(display === "All"){
+    return (question.optionOne.votes.indexOf(authedUser) < 0 &&
+      question.optionTwo.votes.indexOf(authedUser) < 0)
+  }else{
+    return false
   }
+}
 
-  render() {
-    const { authedUser, id, users, questions } = this.props
-    const  question = questions[id]
+const QuestionPage = ({authedUser, id, users, questions}) => {
 
-    if (question === undefined){
-      console.log("Question does not exist")
-      this.props.history.push('/404')
-      return(<Redirect to='/404'/>)
-    }
+  const question = questions[id]
+
+  if (question === undefined){
+    this.props.history.push('/404')
+    return(<Redirect to='/404'/>)
+  }
 
     return (
       <div>
@@ -39,7 +36,7 @@ class QuestionPage extends Component {
                     id={id}
                     question={question}
                     users={users}
-                    unanswered={this.canVote(question, authedUser, "All")}/>
+                    unanswered={canVote(question, authedUser, "All")}/>
                   : null
                 }
               </ul>
@@ -51,7 +48,6 @@ class QuestionPage extends Component {
       </div>
     )
   }
-}
 
 function mapStateToProps ({ questions, authedUser, users }, props) {
   const { id } = props.match.params
