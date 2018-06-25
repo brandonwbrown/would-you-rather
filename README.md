@@ -82,9 +82,8 @@ This project has not yet been deployed.
 
 ## Issues
 
-Two TODO issues exist:
-1) react nested routing doesn't allow 404 page renders
-2) it's not so pretty, will revamp with react-bootstrap
+One TODO issue exist:
+1) it's not so pretty, I will revamp with react-bootstrap
 
 ## Acknowledgments
 
