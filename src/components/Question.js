@@ -34,7 +34,7 @@ class Question extends Component {
   render() {
     const { question, users, unanswered } = this.props
 
-    if (question === undefined) {
+    if (question === null) {
       return <p>This Question does not yet exist.</p>
     }
 

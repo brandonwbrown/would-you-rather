@@ -28,13 +28,17 @@ class HomePage extends Component {
               <Route path='/add' exact component={NewQuestion} />
               <Route path='/question/:id' component={QuestionPage} />
               <Route path='/' exact component={Dashboard} />
+              <Route path='/404' exact component={NotFound} />
               {/*TODO: this nested NotFound route doesn't work*/}
               <Route component={NotFound} />
             </Switch>
           </Fragment>
           :
-          <Redirect to='/login' />
-        }
+          <Fragment>
+            {console.log("redirecting to login!!!")}
+            <Redirect to='/login' />
+          </Fragment>
+      }
       </div>
     )
   }

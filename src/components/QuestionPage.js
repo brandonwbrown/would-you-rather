@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 
 class QuestionPage extends Component {
@@ -19,7 +19,13 @@ class QuestionPage extends Component {
 
   render() {
     const { authedUser, id, users, questions } = this.props
-    const  question  = questions[id]
+    const  question = questions[id]
+
+    if (question === undefined){
+      console.log("Question does not exist")
+      this.props.history.push('/404')
+      return(<Redirect to='/404'/>)
+    }
 
     return (
       <div>
@@ -58,4 +64,4 @@ function mapStateToProps ({ questions, authedUser, users }, props) {
   }
 }
 
-export default connect(mapStateToProps)(QuestionPage)
+export default withRouter(connect(mapStateToProps)(QuestionPage))
