@@ -7,8 +7,7 @@ import { Redirect } from 'react-router-dom'
 class Dashboard extends Component {
 
   state = {
-    display: "Unanswered",
-    questions: []
+    display: "Unanswered"
   }
 
   displayChoices = ["Unanswered", "Answered", "All"]
@@ -16,20 +15,6 @@ class Dashboard extends Component {
   handleDisplayChange = (event) => {
     if(event.target.value){
       this.setState({display: event.target.value})
-    }
-  }
-
-  shouldDisplay = (question, display, authedUser) => {
-    if(display === "All"){
-      return true
-    }else if(display === "Answered"){
-      return(question.optionOne.votes.indexOf(authedUser) >= 0 ||
-          question.optionTwo.votes.indexOf(authedUser) >= 0)
-    }else if(display === "Unanswered"){
-      return(question.optionOne.votes.indexOf(authedUser) < 0 &&
-          question.optionTwo.votes.indexOf(authedUser) < 0)
-    }else{
-      return false
     }
   }
 
@@ -46,7 +31,10 @@ class Dashboard extends Component {
 
 
   render() {
-    const { authedUser, questionIds, users } = this.props
+    const { authedUser, all, unanswered, answered, users } = this.props
+
+    const qs = this.state.display === "Answered" ? answered :
+      this.state.display === "Unanswered" ? unanswered : all
 
     return (
       <div>
@@ -62,23 +50,15 @@ class Dashboard extends Component {
                 </select>
               </div>
               <ul className='dashboard-list'>
-                {questionIds ? Object
-                  .values(questionIds)
-                  .filter((q) => {
-                    return this.shouldDisplay(q, this.state.display, authedUser)
+                {qs.map((q) => {
+                    return(<li key={q.id}>
+                      <Question
+                        id={q.id}
+                        question={q}
+                        users={users}
+                        unanswered={this.canVote(q, authedUser, "All")}/>
+                    </li>)
                   })
-                  .sort(((a,b,) => b.timestamp - a.timestamp))
-                  .map((q) => {
-                    return (
-                        <li key={q.id}>
-                          <Question
-                            id={q.id}
-                            question={q}
-                            users={users}
-                            unanswered={this.canVote(q, authedUser, this.state.display)}/>
-                        </li>)
-                      })
-                  : null
                 }
               </ul>
             </div>
@@ -92,10 +72,25 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps ({ questions, authedUser, users }) {
+  const all = Object.values(questions.questions)
+              .sort((a,b) => b.timestamp - a.timestamp)
+  const answered = Object.values(all)
+        .filter((q) => (
+          q.optionOne.votes.includes(authedUser) ||
+          q.optionTwo.votes.includes(authedUser)))
+        .sort((a,b) => b.timestamp - a.timestamp)
+  const unanswered = Object.values(all)
+        .filter((q) => (
+          !q.optionOne.votes.includes(authedUser) &&
+          !q.optionTwo.votes.includes(authedUser)))
+        .sort((a,b) => b.timestamp - a.timestamp)
+
   return {
     authedUser: authedUser,
     users: users.users,
-    questionIds: questions.questions
+    answered: answered,
+    unanswered: unanswered,
+    all: all
   }
 }
 
