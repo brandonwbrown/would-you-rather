@@ -20,7 +20,6 @@ const QuestionPage = ({authedUser, id, users, questions}) => {
   const question = questions[id]
 
   if (question === undefined){
-    this.props.history.push('/404')
     return(<Redirect to='/404'/>)
   }
 

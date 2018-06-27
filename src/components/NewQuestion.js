@@ -3,35 +3,34 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { handleAddQuestion } from '../actions/shared'
 
+const defaultState = {
+  optionOneText: '',
+  optionTwoText: '',
+  toHome: false
+}
 
 class NewQuestion extends Component {
-
-  state = {
-    optionOneText: '',
-    optionTwoText: '',
-    toHome: false
-  }
+  state = defaultState
 
   handleChange = (option, e) => {
     const text = e.target.value
 
-    this.setState(() => ({
+    this.setState({
       [option]: text
-    }))
+    })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
 
     const { optionOneText, optionTwoText } = this.state
-    const { dispatch, id } = this.props
+    const { dispatch } = this.props
 
     dispatch(handleAddQuestion(optionOneText, optionTwoText))
 
     this.setState(() => ({
-      optionOneText: '',
-      optionTwoText: '',
-      toHome: id ? false : true, //TODO toHome always true
+      ...defaultState,
+      toHome: true
     }))
   }
 

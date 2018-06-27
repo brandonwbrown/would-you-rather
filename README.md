@@ -1,6 +1,6 @@
 # Would You Rather
 
-This project is a proof-of-concept game that demonstrates complex state management in a React-Redux store. You can login as one of 3 users and vote on questions, create questions, as well as look at history. The datastore API is static and resets on reloads. Deatiled project specs are outlined below.
+This project is a proof-of-concept game that demonstrates complex state management in a React-Redux store. You can login as one of 3 users and vote on questions, create questions, as well as look at history. The datastore API is static and resets on reloads. Deatiled project specs are outlined [here] (https://github.com/brandonwbrown/would-you-rather/blob/master/Would%20You%20Rather%20Specs.pdf).
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -35,6 +35,7 @@ This project has not yet been deployed.
 ## Directory Structure
 
 ```
+.
 ├── README.md
 ├── Would\ You\ Rather\ Specs.pdf
 ├── WouldYouRather-ComponentDiagram.xd
