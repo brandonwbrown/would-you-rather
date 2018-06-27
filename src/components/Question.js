@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import { formatDate } from '../utils/helpers'
+import { formatDate, getPercent } from '../utils/helpers'
 import { handleSaveQuestionAnswer } from '../actions/shared'
 import { Button, Label } from 'react-bootstrap'
 
@@ -25,12 +25,6 @@ class Question extends Component {
     return question[option].votes.indexOf(authedUser) >= 0
   }
 
-  getPercent = (one, two) => {
-    if (two === 0) return 100
-    if (one === 0) return 0
-    return Math.floor(one/(one+two)*100)
-  }
-
   render() {
     const { question, users, unanswered } = this.props
 
@@ -39,7 +33,7 @@ class Question extends Component {
     }
 
     const { id, author, timestamp, optionOne, optionTwo  } = question
-    const optionOnePercent = this.getPercent(
+    const optionOnePercent = getPercent(
                                     optionOne.votes.length,
                                     optionTwo.votes.length)
     const optionTwoPercent = 100 - optionOnePercent

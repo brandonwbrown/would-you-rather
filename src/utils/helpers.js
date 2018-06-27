@@ -23,3 +23,9 @@ export function formatQuestion ({ optionOneText, optionTwoText, author }) {
     }
   }
 }
+
+export function getPercent(one, two){
+  if (two === 0) return 100
+  if (one === 0) return 0
+  return Math.floor(one/(one+two)*100)
+}
