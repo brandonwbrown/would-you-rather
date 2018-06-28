@@ -3,7 +3,7 @@ import storage from 'redux-persist/lib/storage'
 import combineReducers from '../reducers'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk';
-import { LOG_OUT } from '../actions/authedUser'
+import { LOG_OUT } from '../actions/actionTypes'
 import logger from '../middleware/logger'
 import { purgeStoredState } from 'redux-persist'
 

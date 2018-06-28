@@ -11,26 +11,14 @@ const Leaderboard = ({authedUser, users}) => (
         <div>
           <h3 className='center'>Leaders</h3>
           <ul className='dashboard-list'>
-            {users ? Object.values(users)
-              .sort((a, b) => {
-                return(
-                  a.questions.length + Object.keys(a.answers).length >
-                  b.questions.length + Object.keys(b.answers).length ? -1
-                  :
-                  (b.questions.length + Object.keys(b.answers).length >
-                  a.questions.length + Object.keys(a.answers).length ? 1
-                  : 0)
-                )
-              })
-              .map((u, index) => {
+            {users ? users.map((u, index) => { //sort and use indices as ranks
               let rank = index + 1
               return (
                   <li key={u.id}>
                     <User id={u.id} user={u} rank={rank}/>
                   </li>)
               })
-            : null
-            }
+            : null}
           </ul>
         </div>
       </Fragment>
@@ -43,7 +31,17 @@ const Leaderboard = ({authedUser, users}) => (
 function mapStateToProps ({ authedUser, users }) {
   return {
     authedUser: authedUser,
-    users: users
+    users: Object.values(users)
+      .sort((a, b) => {
+        return(
+          a.questions.length + Object.keys(a.answers).length >
+          b.questions.length + Object.keys(b.answers).length ? -1
+          :
+          (b.questions.length + Object.keys(b.answers).length >
+          a.questions.length + Object.keys(a.answers).length ? 1
+          : 0)
+        )
+      })
   }
 }
 

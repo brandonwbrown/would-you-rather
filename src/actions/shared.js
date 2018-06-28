@@ -57,15 +57,3 @@ export function handleAddQuestion (optionOneText, optionTwoText) {
       .then(() => dispatch(hideLoading()))
   }
 }
-
-export function handleLogout(){
-  return(dispatch) => {
-    dispatch(Logout)
-  }
-}
-
-export function Logout () {
-  return {
-    type: 'LOGOUT'
-  }
-}

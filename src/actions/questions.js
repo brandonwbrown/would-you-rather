@@ -1,8 +1,6 @@
 import { saveQuestionAnswer } from '../utils/api'
+import { RECEIVE_QUESTIONS, VOTE_4_QUESTION, ADD_QUESTION } from './actionTypes'
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const VOTE_4_QUESTION = 'VOTE_4_QUESTION'
-export const ADD_QUESTION = 'ADD_QUESTION'
 
 export function receiveQuestions (questions) {
   return {
