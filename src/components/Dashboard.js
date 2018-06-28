@@ -72,7 +72,7 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps ({ questions, authedUser, users }) {
-  const all = Object.values(questions.questions)
+  const all = Object.values(questions)
               .sort((a,b) => b.timestamp - a.timestamp)
   const answered = Object.values(all)
         .filter((q) => (
@@ -87,7 +87,7 @@ function mapStateToProps ({ questions, authedUser, users }) {
 
   return {
     authedUser: authedUser,
-    users: users.users,
+    users: users,
     answered: answered,
     unanswered: unanswered,
     all: all

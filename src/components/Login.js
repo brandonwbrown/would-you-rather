@@ -29,9 +29,9 @@ class Login extends Component {
     // I should be able to just use users but the API is giving me
     // users.users
     const { users, authedUser } = this.props
-    const names = Object.keys((users || {}).users || {})
-    const logins = []
-    Array.prototype.forEach.call(names, (n) => (logins.push(n)))
+    // const names = Object.keys((users || {}).users || {})
+    // const logins = []
+    // Array.prototype.forEach.call(names, (n) => (logins.push(n)))
 
     return (
       <Fragment>
@@ -40,7 +40,7 @@ class Login extends Component {
           <Label>Please login: </Label>
           <select value={authedUser} onChange={(e) => this.handleLoginChange(e)}>
             <option value="">Choose a name...</option>
-            {logins.map((item) => {
+            {users.map((item) => {
               return <option key={item} value={item}>{item}</option>
             })}
           </select>
@@ -56,7 +56,7 @@ class Login extends Component {
 function mapStateToProps ({ authedUser, users }) {
   return {
     loading: users === null,
-    users: users
+    users: Object.keys(users)
   }
 }
 

@@ -8,27 +8,19 @@ import {
 export function getInitialData () {
   return Promise.all([
     _getQuestions(),
-  ]).then(([questions]) => ({
-    questions
-  }))
+  ]).then(questions => questions[0]) //handle nested return
 }
 
 export function getInitialUsers () {
   return Promise.all([
     _getUsers(),
-  ]).then(([users]) => ({
-    users
-  }))
+  ]).then(users => users[0]) //handle nested return
 }
 
 export function saveQuestionAnswer(info) {
   return Promise.all([
     _saveQuestionAnswer(info),
-  ]).then(([questions]) => {
-    //TODO: not sure why I need to deconstruct this,
-    // related to users.users issue with API
-    {questions}
-  })
+  ]).then(questions => questions[0])
 }
 
 export function saveNewQuestion(info) {

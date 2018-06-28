@@ -43,7 +43,7 @@ const Leaderboard = ({authedUser, users}) => (
 function mapStateToProps ({ authedUser, users }) {
   return {
     authedUser: authedUser,
-    users: users.users
+    users: users
   }
 }
 

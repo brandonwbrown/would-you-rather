@@ -1,28 +1,31 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
 import { Redirect, withRouter } from 'react-router-dom'
 
 
-const canVote = (question, authedUser, display) => {
-  if(display === "Unanswered"){
-    return true
-  }else if(display === "All"){
-    return (question.optionOne.votes.indexOf(authedUser) < 0 &&
-      question.optionTwo.votes.indexOf(authedUser) < 0)
-  }else{
-    return false
-  }
-}
+class QuestionPage extends Component {
 
-const QuestionPage = ({authedUser, id, users, questions}) => {
-
-  const question = questions[id]
-
-  if (question === undefined){
-    return(<Redirect to='/404'/>)
+  canVote = (question, authedUser, display) => {
+    if(display === "Unanswered"){
+      return true
+    }else if(display === "All"){
+      return (question.optionOne.votes.indexOf(authedUser) < 0 &&
+        question.optionTwo.votes.indexOf(authedUser) < 0)
+    }else{
+      return false
+    }
   }
 
+  render(){
+    const { authedUser, id, users, questions } = this.props
+
+    const question = questions[id]
+
+    if (question === undefined){
+      return(<Redirect to='/404'/>)
+    }
+    
     return (
       <div>
         {authedUser ?
@@ -35,7 +38,7 @@ const QuestionPage = ({authedUser, id, users, questions}) => {
                     id={id}
                     question={question}
                     users={users}
-                    unanswered={canVote(question, authedUser, "All")}/>
+                    unanswered={this.canVote(question, authedUser, "All")}/>
                   : null
                 }
               </ul>
@@ -47,14 +50,15 @@ const QuestionPage = ({authedUser, id, users, questions}) => {
       </div>
     )
   }
+}
 
 function mapStateToProps ({ questions, authedUser, users }, props) {
   const { id } = props.match.params
 
   return {
-    questions: questions.questions,
+    questions: questions,
     authedUser: authedUser,
-    users: users.users,
+    users: users,
     id: id
   }
 }

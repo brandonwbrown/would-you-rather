@@ -43,7 +43,7 @@ class Question extends Component {
           <Link to={`/question/${id}`} className="question">
             <div className='question-header'>
               <img
-                src={users.users[author].avatarURL}
+                src={users[author].avatarURL}
                 alt={`Avatar of ${author}`}
                 className='avatar'
               />
@@ -118,7 +118,7 @@ class Question extends Component {
 }
 
 function mapStateToProps ({ questions, authedUser, users}, { id }) {
-  const question = questions.questions[id]
+  const question = questions[id]
 
   return {
     authedUser: authedUser,

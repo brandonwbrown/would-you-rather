@@ -58,7 +58,7 @@ class Nav extends Component {
 function mapStateToProps ({ authedUser, users }) {
   return {
     authedUser: authedUser,
-    userIds: users.users
+    userIds: users
   }
 }
 

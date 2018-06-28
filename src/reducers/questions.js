@@ -10,27 +10,20 @@ export default function questions (state = {}, action) {
     case VOTE_4_QUESTION:
        return {
          ...state,
-         questions: {
-           ...state.questions,
-           [action.id]: {
-             ...state.questions[action.id],
-             [action.answer] : {
-               ...state.questions[action.id][action.answer],
-               votes: state
-                .questions[action.id][action.answer]
-                .votes.concat(action.authedUser)
-             }
+         [action.id]: {
+           ...state[action.id],
+           [action.answer] : {
+             ...state[action.id][action.answer],
+             votes: state[action.id][action.answer]
+              .votes.concat(action.authedUser)
            }
          }
        }
      case ADD_QUESTION:
-       return {
+      return {
          ...state,
-         questions: {
-           ...state.questions,
-           [action.question.id]: action.question
-         }
-       }
+         [action.question.id]: action.question
+      }
     default :
       return state
   }
